@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Archivo:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gnome design system — "garden almanac / seed packet"
+   Parchment canvas, deep forest green, terracotta + marigold accents.
+   All colors MUST be HSL. */
+
+@layer base {
+  :root {
+    /* Canvas + surfaces */
+    --background: 42 44% 94%;
+    --foreground: 150 30% 12%;
+
+    --card: 40 50% 97%;
+    --card-foreground: 150 30% 12%;
+
+    --popover: 40 50% 97%;
+    --popover-foreground: 150 30% 12%;
+
+    /* Deep forest green */
+    --primary: 150 33% 18%;
+    --primary-foreground: 42 50% 96%;
+
+    /* Sage */
+    --secondary: 100 18% 86%;
+    --secondary-foreground: 150 33% 18%;
+
+    --muted: 42 30% 89%;
+    --muted-foreground: 145 12% 38%;
+
+    /* Terracotta */
+    --accent: 18 55% 50%;
+    --accent-foreground: 42 50% 97%;
+
+    --destructive: 4 62% 45%;
+    --destructive-foreground: 42 50% 97%;
+
+    --border: 40 24% 82%;
+    --input: 40 24% 82%;
+    --ring: 150 33% 24%;
+
+    --radius: 0.75rem;
+
+    /* Brand extras */
+    --marigold: 38 72% 55%;
+    --marigold-foreground: 30 45% 14%;
+    --terracotta: 18 55% 50%;
+    --moss: 96 26% 40%;
+    --sky: 197 40% 46%;
+    --parchment: 42 44% 94%;
+    --ink: 150 30% 12%;
+
+    /* Listing type hues */
+    --type-free: 96 34% 34%;
+    --type-trade: 197 42% 38%;
+    --type-sale: 18 55% 44%;
+    --type-wanted: 275 26% 44%;
+
+    --sidebar-background: 150 33% 18%;
+    --sidebar-foreground: 42 40% 92%;
+    --sidebar-primary: 38 72% 55%;
+    --sidebar-primary-foreground: 150 33% 14%;
+    --sidebar-accent: 150 25% 24%;
+    --sidebar-accent-foreground: 42 40% 92%;
+    --sidebar-border: 150 20% 28%;
+    --sidebar-ring: 38 72% 55%;
+  }
+
+  .dark {
+    --background: 152 26% 9%;
+    --foreground: 42 34% 92%;
+
+    --card: 152 22% 13%;
+    --card-foreground: 42 34% 92%;
+
+    --popover: 152 22% 13%;
+    --popover-foreground: 42 34% 92%;
+
+    --primary: 96 30% 62%;
+    --primary-foreground: 152 30% 10%;
+
+    --secondary: 152 18% 20%;
+    --secondary-foreground: 42 34% 92%;
+
+    --muted: 152 16% 18%;
+    --muted-foreground: 100 10% 66%;
+
+    --accent: 18 58% 56%;
+    --accent-foreground: 152 30% 10%;
+
+    --destructive: 4 58% 52%;
+    --destructive-foreground: 42 34% 94%;
+
+    --border: 152 14% 22%;
+    --input: 152 14% 22%;
+    --ring: 96 30% 62%;
+
+    --marigold: 38 70% 60%;
+    --marigold-foreground: 152 30% 10%;
+
+    --type-free: 96 34% 56%;
+    --type-trade: 197 42% 58%;
+    --type-sale: 18 58% 60%;
+    --type-wanted: 275 30% 66%;
+
+    --sidebar-background: 152 26% 9%;
+    --sidebar-foreground: 42 34% 92%;
+    --sidebar-primary: 38 70% 60%;
+    --sidebar-primary-foreground: 152 30% 10%;
+    --sidebar-accent: 152 18% 18%;
+    --sidebar-accent-foreground: 42 34% 92%;
+    --sidebar-border: 152 14% 22%;
+    --sidebar-ring: 38 70% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    /* Prevent horizontal scroll on narrow phones */
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Fraunces", ui-serif, Georgia, serif;
+    font-optical-sizing: auto;
+    @apply tracking-tight;
+  }
+
+  /* Visible, on-brand focus rings for keyboard users */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Avoid iOS zoom-on-focus: inputs need >= 16px */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Paper grain — gives the parchment canvas depth instead of flat color */
+  .bg-grain {
+    background-image:
+      radial-gradient(circle at 18% 12%, hsl(var(--marigold) / 0.09), transparent 42%),
+      radial-gradient(circle at 84% 8%, hsl(var(--moss) / 0.11), transparent 46%),
+      radial-gradient(circle at 50% 100%, hsl(var(--terracotta) / 0.07), transparent 55%);
+  }
+
+  .bg-speckle {
+    background-image: radial-gradient(hsl(var(--ink) / 0.055) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+
+  /* Hand-drawn seed-packet rule */
+  .rule-stitch {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--border)) 0 8px,
+      transparent 8px 14px
+    );
+    height: 2px;
+  }
+
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px hsl(var(--ink) / 0.05),
+      0 8px 24px -12px hsl(var(--ink) / 0.18);
+  }
+
+  .shadow-lift {
+    box-shadow:
+      0 2px 4px hsl(var(--ink) / 0.06),
+      0 18px 40px -18px hsl(var(--ink) / 0.28);
+  }
+
+  /* Safe-area helpers for sticky mobile bars */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Horizontal chip rails that snap on touch */
+  .snap-rail {
+    scroll-snap-type: x proximity;
+  }
+  .snap-rail > * {
+    scroll-snap-align: start;
+  }
+}
